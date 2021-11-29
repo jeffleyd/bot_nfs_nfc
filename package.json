@@ -1,0 +1,33 @@
+{
+  "name": "robotiex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cheerio": "^1.0.0-rc.5",
+    "dom-parse": "^2.1.0",
+    "dom-parser": "^0.1.6",
+    "dom-to-image": "^2.6.0",
+    "express": "^4.17.1",
+    "html-to-image": "^1.7.0",
+    "http": "^0.0.1-security",
+    "image-to-base64": "^2.2.0",
+    "moment": "^2.29.1",
+    "mysql": "^2.18.1",
+    "node-html-parser": "^4.1.2",
+    "pg": "^8.5.1",
+    "robotjs": "^0.6.0",
+    "selenium-webdriver": "^4.0.0-beta.2",
+    "socket.io": "^4.0.0",
+    "sqlite3": "^5.0.2",
+    "web3": "^1.4.0",
+    "yargs": "^16.2.0"
+  }
+}

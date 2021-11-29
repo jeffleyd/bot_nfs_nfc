@@ -1,0 +1,150 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+const WOFF = 'application/font-woff';
+const JPEG = 'image/jpeg';
+const mimes = {
+    woff: WOFF,
+    woff2: WOFF,
+    ttf: 'application/font-truetype',
+    eot: 'application/vnd.ms-fontobject',
+    png: 'image/png',
+    jpg: JPEG,
+    jpeg: JPEG,
+    gif: 'image/gif',
+    tiff: 'image/tiff',
+    svg: 'image/svg+xml',
+};
+export const uuid = (function uuid() {
+    // generate uuid for className of pseudo elements.
+    // We should not use GUIDs, otherwise pseudo elements sometimes cannot be captured.
+    let counter = 0;
+    // ref: http://stackoverflow.com/a/6248722/2519373
+    const random = () => `0000${((Math.random() * Math.pow(36, 4)) << 0).toString(36)}`.slice(-4);
+    return () => {
+        counter += 1;
+        return `u${random()}${counter}`;
+    };
+})();
+export function getExtension(url) {
+    const match = /\.([^./]*?)$/g.exec(url);
+    return match ? match[1] : '';
+}
+export function getMimeType(url) {
+    const ext = getExtension(url).toLowerCase();
+    return mimes[ext] || '';
+}
+export function delay(ms) {
+    return (args) => new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(args);
+        }, ms);
+    });
+}
+export function isDataUrl(url) {
+    return url.search(/^(data:)/) !== -1;
+}
+export function toDataURL(content, mimeType) {
+    return `data:${mimeType};base64,${content}`;
+}
+export function getDataURLContent(dataURL) {
+    return dataURL.split(/,/)[1];
+}
+function toBlob(canvas) {
+    return new Promise((resolve) => {
+        const binaryString = window.atob(canvas.toDataURL().split(',')[1]);
+        const len = binaryString.length;
+        const binaryArray = new Uint8Array(len);
+        for (let i = 0; i < len; i += 1) {
+            binaryArray[i] = binaryString.charCodeAt(i);
+        }
+        resolve(new Blob([binaryArray], { type: 'image/png' }));
+    });
+}
+export function canvasToBlob(canvas) {
+    if (canvas.toBlob) {
+        return new Promise((resolve) => canvas.toBlob(resolve));
+    }
+    return toBlob(canvas);
+}
+export function toArray(arrayLike) {
+    const result = [];
+    for (let i = 0, l = arrayLike.length; i < l; i += 1) {
+        result.push(arrayLike[i]);
+    }
+    return result;
+}
+function px(node, styleProperty) {
+    const val = window.getComputedStyle(node).getPropertyValue(styleProperty);
+    return parseFloat(val.replace('px', ''));
+}
+export function getNodeWidth(node) {
+    const leftBorder = px(node, 'border-left-width');
+    const rightBorder = px(node, 'border-right-width');
+    return node.clientWidth + leftBorder + rightBorder;
+}
+export function getNodeHeight(node) {
+    const topBorder = px(node, 'border-top-width');
+    const bottomBorder = px(node, 'border-bottom-width');
+    return node.clientHeight + topBorder + bottomBorder;
+}
+export function getPixelRatio() {
+    let ratio;
+    let FINAL_PROCESS;
+    try {
+        FINAL_PROCESS = process;
+    }
+    catch (e) { }
+    const val = FINAL_PROCESS && FINAL_PROCESS.env
+        ? FINAL_PROCESS.env.devicePixelRatio
+        : null;
+    if (val) {
+        ratio = parseInt(val, 10);
+        if (isNaN(ratio)) {
+            ratio = 1;
+        }
+    }
+    return ratio || window.devicePixelRatio || 1;
+}
+export function createImage(url) {
+    return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = reject;
+        image.crossOrigin = 'anonymous';
+        image.src = url;
+    });
+}
+export function svgToDataURL(svg) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return Promise.resolve()
+            .then(() => new XMLSerializer().serializeToString(svg))
+            .then(encodeURIComponent)
+            .then((html) => `data:image/svg+xml;charset=utf-8,${html}`);
+    });
+}
+export function getBlobFromImageURL(url) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return createImage(url).then((image) => {
+            const { width, height } = image;
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            const ratio = getPixelRatio();
+            canvas.width = width * ratio;
+            canvas.height = height * ratio;
+            canvas.style.width = `${width}`;
+            canvas.style.height = `${height}`;
+            context.scale(ratio, ratio);
+            context.drawImage(image, 0, 0);
+            const dataURL = canvas.toDataURL(getMimeType(url));
+            return getDataURLContent(dataURL);
+        });
+    });
+}
+//# sourceMappingURL=util.js.map

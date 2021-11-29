@@ -1,0 +1,32 @@
+var states = {
+    'AC': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'AL': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'AP': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'AM': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'BA': 'http://nfe.sefaz.ba.gov.br/servicos/nfce/Modulos/Geral/NFCEC_consulta_chave_acesso.aspx',
+    'CE': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'DF': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'ES': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'GO': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'MA': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'MS': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'MT': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'MG': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'PA': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'PB': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'PR': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'PE': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'PI': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'RJ': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'RN': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'RS': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'RO': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'RR': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'SC': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'SP': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'SE': 'https://dfe-portal.svrs.rs.gov.br/Nfce/Consulta',
+    'TO': 'http://www.sefaz.to.gov.br/nfce/consulta.jsf',
+    'ALL': 'https://dfe-portal.svrs.rs.gov.br/Nfe/Consulta'
+}
+
+module.exports = {states};
